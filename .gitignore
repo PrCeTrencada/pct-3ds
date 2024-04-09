@@ -1,0 +1,11 @@
+.vs/
+build/
+output/
+x64/
+.editorconfig
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sh
+*.smdh

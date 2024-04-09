@@ -1,0 +1,154 @@
+﻿#pragma once
+
+// Reference: https://www.3dbrew.org/wiki/System_Font
+
+
+// 0
+
+#define CHAR_BUTTON_A "\ue000"	
+#define CHAR_BUTTON_B "\ue001"	
+#define CHAR_BUTTON_X "\ue002"
+#define CHAR_BUTTON_Y "\ue003"	
+#define CHAR_BUTTON_L "\ue004"	
+#define CHAR_BUTTON_R "\ue005"	
+#define CHAR_DPAD "\ue006"		
+#define CHAR_CLOCK "\ue007"		
+#define CHAR_EMOTICON_SMILEY "\ue008"		
+#define CHAR_EMOTICON_ANGRY "\ue009"	
+#define CHAR_EMOTICON_SAD "\ue00A"		
+#define CHAR_EMOTICON_NEUTRAL "\ue00B"	
+#define CHAR_SUN "\ue00C"		
+#define CHAR_CLOUD "\ue00D"		
+#define CHAR_UMBRELLA "\ue00E"		
+#define CHAR_SNOWMAN "\ue00F"	
+
+// 1
+
+#define CHAR_EXCLAMATION_NEGATIVE "\ue010"
+#define CHAR_QUESTION_NEGATIVE "\ue011"
+#define CHAR_MAIL "\ue012"
+#define CHAR_PHONE "\ue013"
+#define CHAR_SQUARE_DOT "\ue014"
+#define CHAR_SPADES "\ue015"
+#define CHAR_DIAMONDS "\ue016"
+#define CHAR_HEARTS "\ue016"
+#define CHAR_FLOWERS "\ue018"
+#define CHAR_RIGHT_ARROW "\ue019"
+#define CHAR_LEFT_ARROW "\ue01A"
+#define CHAR_UP_ARROW "\ue01B"
+#define CHAR_DOWN_ARROW "\ue01C"
+#define CHAR_CIRCLE_DOT "\ue01D"
+#define CHAR_CAMERA "\ue01E"
+#define CHAR_SQUARE_CROSS_1 "\ue01F"
+
+// 2
+
+#define CHAR_LOADING_ANIM_1 "\ue020"
+#define CHAR_LOADING_ANIM_2 "\ue021"
+#define CHAR_LOADING_ANIM_3 "\ue022"
+#define CHAR_LOADING_ANIM_4 "\ue023"
+#define CHAR_LOADING_ANIM_5 "\ue024"
+#define CHAR_LOADING_ANIM_6 "\ue025"
+#define CHAR_LOADING_ANIM_7 "\ue026"
+#define CHAR_LOADING_ANIM_8 "\ue027"
+#define CHAR_CROSS "\ue028"
+#define CHAR_SQUARE_A_PICTOCHAT "\ue029"
+#define CHAR_SQUARE_B_PICTOCHAT "\ue02A"
+#define CHAR_SQUARE_C_PICTOCHAT "\ue02B"
+#define CHAR_SQUARE_D_PICTOCHAT "\ue02C"
+#define CHAR_SQUARE_A_NEGATIVE "\ue02D"
+#define CHAR_SQUARE_M_NEGATIVE "\ue02E"
+
+// 3
+
+#define CHAR_P_PICTOCHAT "\ue030"
+#define CHAR_I_PICTOCHAT "\ue031"
+#define CHAR_C_PICTOCHAT "\ue032"
+#define CHAR_T_PICTOCHAT "\ue033"
+#define CHAR_H_PICTOCHAT "\ue034"
+#define CHAR_A_PICTOCHAT "\ue035"
+#define CHAR_SQUARE_CROSS_2 "\ue036"
+#define CHAR_SQUARE_CROSS_3 "\ue037"
+#define CHAR_SQUARE_CROSS_4 "\ue038"
+#define CHAR_SQUARE_CROSS_5 "\ue039"
+#define CHAR_SQUARE_CROSS_6 "\ue03A"
+#define CHAR_SQUARE_CROSS_7 "\ue03B"
+#define CHAR_SQUARE_CROSS_8 "\ue03C"
+#define CHAR_SQUARE_CROSS_9 "\ue03D"
+#define CHAR_SQUARE_X_NEGATIVE_SMALL "\ue03E"
+#define CHAR_SQUARE_X_NEGATIVE_BOLD "\ue03F"
+
+// 4
+
+#define CHAR_BUTTON_POWER_WIIMOTE "\ue040"
+#define CHAR_DPAD_WIIMOTE "\ue041"
+#define CHAR_BUTTON_A_WIIMOTE "\ue042"
+#define CHAR_BUTTON_B_WIIMOTE "\ue043"
+#define CHAR_BUTTON_HOME_WIIMOTE "\ue044"
+// + <=> Start
+#define CHAR_BUTTON_PLUS_WIIMOTE "\ue045"
+// - <=> Select
+#define CHAR_BUTTON_MINUS_WIIMOTE "\ue046"
+#define CHAR_BUTTON_1_WIIMOTE "\ue047"
+#define CHAR_BUTTON_2_WIIMOTE "\ue048"
+#define CHAR_ANALOG_STICK_NUNCHUCK "\ue049"
+#define CHAR_BUTTON_C_NUNCHUCK "\ue04A"
+#define CHAR_BUTTON_Z_NUNCHUCK "\ue04B"
+#define CHAR_BUTTON_A_CLASSIC_WII "\ue04C"
+#define CHAR_BUTTON_B_CLASSIC_WII "\ue04D"
+#define CHAR_BUTTON_X_CLASSIC_WII "\ue04E"
+#define CHAR_BUTTON_Y_CLASSIC_WII "\ue04F"
+
+// 5
+
+#define CHAR_BUTTON_L_ANALOG_CLASSIC_WII "\ue050"
+#define CHAR_BUTTON_R_ANALOG_CLASSIC_WII "\ue051"
+#define CHAR_BUTTON_L_CLASSIC_WII "\ue052"
+#define CHAR_BUTTON_R_CLASSIC_WII "\ue053"
+#define CHAR_BUTTON_ZL_CLASSIC_WII "\ue054"
+#define CHAR_BUTTON_ZR_CLASSIC_WII "\ue055"
+#define CHAR_RETURN_SYMBOL "\ue056"
+#define CHAR_SPACE_SYMBOL "\ue057"
+#define CHAR_POINTER_WII "\ue058"
+#define CHAR_POINTER_WII_PLAYER1 "\ue059"
+#define CHAR_POINTER_WII_PLAYER2 "\ue05A"
+#define CHAR_POINTER_WII_PLAYER3 "\ue05B"
+#define CHAR_POINTER_WII_PLAYER4 "\ue05C"
+#define CHAR_POINTER_WII_GRAB "\ue05D"
+#define CHAR_POINTER_WII_GRAB_PLAYER1 "\ue05E"
+#define CHAR_POINTER_WII_GRAB_PLAYER2 "\ue05F"
+
+// 6
+
+#define CHAR_POINTER_WII_GRAB_PLAYER3 "\ue060"
+#define CHAR_POINTER_WII_GRAB_PLAYER4 "\ue061"
+#define CHAR_POINTER_WII_OPEN "\ue062"
+#define CHAR_POINTER_WII_OPEN_PLAYER1 "\ue063"
+#define CHAR_POINTER_WII_OPEN_PLAYER2 "\ue064"
+#define CHAR_POINTER_WII_OPEN_PLAYER3 "\ue065"
+#define CHAR_POINTER_WII_OPEN_PLAYER4 "\ue066"
+#define CHAR_WII_LOGO "\ue067"
+#define CHAR_SUPERSCRIPT_ER "\ue068"
+#define CHAR_SUPERSCRIPT_RE "\ue069"
+#define CHAR_SQUARE_QUESTION_NEGATIVE "\ue06A"
+// E06B-F are empty
+
+// 7
+
+#define CHAR_SQUARE_X "\ue070"
+// Used as the system Close Button
+#define CHAR_SQUARE_X_NEGATIVE "\ue071"
+#define CHAR_BACK "\ue072"
+#define CHAR_HOME "\ue073"
+#define CHAR_STEPS "\ue074"
+#define CHAR_PLAYCOIN "\ue075"
+#define CHAR_VIDEOCAMERA "\ue076"
+#define CHAR_ANALOG_STICK_3DS "\ue077"
+#define CHAR_POWER_BUTTON_O3DS "\ue078"
+#define CHAR_DPAD_UP "\ue079"
+#define CHAR_DPAD_DOWN "\ue07A"
+#define CHAR_DPAD_LEFT "\ue07B"
+#define CHAR_DPAD_RIGHT "\ue07C"
+#define CHAR_DPAD_VERTICAL "\ue07D"
+#define CHAR_DPAD_HORIZONTAL "\ue07E"
+// E07F is empty
