@@ -17,7 +17,7 @@ Per a poder instal·lar i fer servir aquesta aplicació cal disposar d'una conso
 
 ## Crèdits
 
-- **[Nil Caballero i Milà](https://twitter.com/PelochoRockea)**: Desenvolupament de l'aplicació i de tots els serveis associats.
+- **[Nil Caballero i Milà](https://github.com/Nilcm01)**: Desenvolupament de l'aplicació i de tots els serveis associats.
 
 - **[Luna Caoimhe](https://twitter.com/LunaValoaa)**: Extracció de textos i traducció de les aplicacions dl sistema de 3DS.
 
