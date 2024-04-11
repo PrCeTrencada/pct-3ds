@@ -15,23 +15,23 @@ Per a poder instal·lar i fer servir aquesta aplicació cal disposar d'una conso
 - [Construcció de l'aplicació](#construcció-de-laplicació)
 
 
-### Crèdits
+## Crèdits
 
-- **Nil Caballero i Milà**: Desenvolupament de l'aplicació i de tots els serveis associats.
+- **[Nil Caballero i Milà](https://github.com/Nilcm01)**: Desenvolupament de l'aplicació i de tots els serveis associats.
 
-- **Luna Caoimhe**: Extracció de textos i traducció de les aplicacions dl sistema de 3DS.
+- **[Luna Caoimhe](https://twitter.com/LunaValoaa)**: Extracció de textos i traducció de les aplicacions dl sistema de 3DS.
 
-- **Projecte 'Ce Trencada'**: Coordinació i suport tecnicolingüístic.
+- **[Projecte 'Ce Trencada'](https://cetrencada.cat)**: Coordinació i suport tecnicolingüístic.
 
 
-### Instal·lació
+## Instal·lació
 
 Per baixar la darrera versió de l'aplicació dirigiu-vos a l'apartat de «Releases» des d'aquí:
 [DARRERA VERSIÓ](https://github.com/PrCeTrencada/pct-3ds/releases/latest).
 
 Segons la variant que escolliu haureu de seguir el procediment corresponent:
 
-#### .cia
+### .cia
 Fitxer per a instal·lar l'aplicació al menú d'inici de la consola.
 
 Podeu instal·lar-la fent servir l'aplicació [FBI](https://github.com/TheRealZora/FBI-Reloaded) (instal·lada com a part del procés d'instal·lació de Luma3DS) de dues formes:
@@ -41,7 +41,7 @@ Podeu instal·lar-la fent servir l'aplicació [FBI](https://github.com/TheRealZo
 
 Un cop fet, us apareixerà al menú d'inici de la consola.
 
-#### .3dsx
+### .3dsx
 Fitxer per a executar l'aplicació des del «**Homebrew Launcher**».
 
 - Apagueu la consola.
