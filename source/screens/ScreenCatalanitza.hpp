@@ -10,6 +10,8 @@
 #include <iostream>
 #include <fstream>
 
+#include <nlohmann/json.hpp>
+
 #include "../common/commonValues.hpp"
 #include "../util/FS.hpp"
 #include "../util/Graphics.hpp"
@@ -21,6 +23,7 @@
 #include "../screens/ScreenBottomGeneric.hpp"
 
 using namespace std;
+using JSON = nlohmann::json;
 
 enum CAT_OPTION {
 	CATALANITZA_HOME = 0
@@ -55,6 +58,8 @@ public:
 	ScreenCatalanitza(C3D_RenderTarget* topScreen, C3D_RenderTarget* bottomScreen);
 	void render();
 
+	bool updateTranslations();
+
 	bool checkIfInstalled(size_t catalanitza);
 	void updateInstalledStatus();
 
@@ -65,34 +70,34 @@ private:
 	C3D_RenderTarget* m_topScreen, * m_bottomScreen;
 	const string m_title = "Catalanitza les apps de la teva 3DS";
 
-	const size_t m_nTexts = 1;
-	const string m_texts[1] = {
-		"Menú Home (menú d'inici)"
-	};
+	/* Structure:
+	*
+	* [
+	*	{
+	*		"id": "",
+	*		"name": "",
+	*		"titleID": "",
+	* 		"version": "",
+	* 		"url": "",
+	*		"desc": ""
+	*	},
+	*	...
+	* ]
+	*/
+	JSON m_translations;
+	size_t m_nTranslations;
+	bool m_updated = false;
 
-	const string m_desc[1] = {
-		// 0 : Menú Home
-		"El menú d'inici de la consola, el primer lloc on apareixes en encendre-la. És el lloc des del qual s'accedeix a la configuració, aplicacions i jocs instal·lats.\n\n"
-		"És compatible amb qualsevol de les llengües del sistema."
-
-		// 1 : Configuració de la consola
-		//"L'aplicació del sistema des de la qual es gestiona la configuració de molts aspectes tals com la connexió Wi-Fi, les restriccions de control parental, la calibració de diversos elements de la consola i demés.\n\n"
-		//"És compatible amb qualsevol de les llengües del sistema."
-	};
-
-	const string m_titleId[1] = {
-		// 0 : Menú Home
-		"0004003000009802"
-	};
-
-	bool m_installed[1] = { false };
+	const string m_textNoTranslations = "No s'ha pogut trobar cap traducció.\n\nReviseu la connexió a internet i intenteu-ho de nou.";
+	
+	vector<bool> m_installed;
 
 	CAT_ACTION m_currentAction;
 	
 	const string m_actions[3] = {
-		CHAR_BUTTON_Y " : Instal·la la traducció",
-		CHAR_BUTTON_Y " : Reinstal·la la traducció",
-		CHAR_BUTTON_X " : Desinstal·la la traducció"
+		"Instal·la " CHAR_BUTTON_Y,
+		"Reinstal·la " CHAR_BUTTON_Y,
+		"Desinstal·la " CHAR_BUTTON_X
 	};
 
 	const string m_doingAction[3] = {

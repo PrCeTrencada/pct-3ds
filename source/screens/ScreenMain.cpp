@@ -12,7 +12,8 @@ ScreenMain::ScreenMain(C3D_RenderTarget* topScreen, C3D_RenderTarget* bottomScre
 	ScreenOpcions screenOpcions(m_topScreen, m_bottomScreen);
 	size_t currentOption = 0;
 
-	bool exit = false;
+	bool exit = false, updateSuccess = false;
+	string updateAvailable = "";
 
 	m_spritePrinter.start();
 
@@ -29,7 +30,7 @@ ScreenMain::ScreenMain(C3D_RenderTarget* topScreen, C3D_RenderTarget* bottomScre
 		switch (m_step)
 		{
 
-		case ScreenMain::STEP_1_PREPARE_PRELOAD:
+		case STEP_1_PREPARE_PRELOAD:
 			// Top screen (400x240)
 			Graphics::activeScreen(m_topScreen);
 			m_spritePrinter.print(SPRITE_PCT_LOGO_150, (TOP_SCREEN_WIDTH / 2) - 75, (TOP_SCREEN_HEIGHT / 2) - 75);
@@ -46,17 +47,91 @@ ScreenMain::ScreenMain(C3D_RenderTarget* topScreen, C3D_RenderTarget* bottomScre
 
 
 
-		case ScreenMain::STEP_2_PRELOAD:
+		case STEP_2_PRELOAD:
 			// Load config : TODO
-			// Check for updates : TODO
+
+			// Create some necessary directories
+			FS::createDirectory("/PCT");
+			FS::createDirectory("/luma");
+			FS::createDirectory("/luma/titles");
+
+			// Check for app updates
+			updateAvailable = checkForUpdate();
+
+			// Update the PCT-COM entrades from web
 			screenTraduccions.updateEntrades();
+
+			// Update the 3DS-CAT translations from web
+			screenCatalanitza.updateTranslations();
 			
-			m_step = STEP_3_MAIN;
+			if (updateAvailable != "")
+				m_step = STEP_3_UPDATE_AVAILABLE;
+			else
+				m_step = STEP_7_MAIN;
 			break;
 
 
 
-		case ScreenMain::STEP_3_MAIN:
+		case STEP_3_UPDATE_AVAILABLE:
+			// Top screen (400x240)
+			Graphics::activeScreen(m_topScreen);
+			m_spritePrinter.print(SPRITE_PCT_LOGO_150, (TOP_SCREEN_WIDTH / 2) - 75, (TOP_SCREEN_HEIGHT / 2) - 75);
+
+			// Bottom screen (320x240)
+			Graphics::activeScreen(m_bottomScreen);
+			
+			TextPrinter::print((m_textUpdateAvailable[0] + " (" + updateAvailable + ")").c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 5, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
+
+			TextPrinter::print(m_textUpdateAvailable[1].c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 7, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
+
+			if (Input::isPressed(KEY_START))
+				m_step = STEP_4_PREPARE_UPDATE;
+			break;
+
+
+
+		case STEP_4_PREPARE_UPDATE:
+			// Top screen (400x240)
+			Graphics::activeScreen(m_topScreen);
+			m_spritePrinter.print(SPRITE_PCT_LOGO_150, (TOP_SCREEN_WIDTH / 2) - 75, (TOP_SCREEN_HEIGHT / 2) - 75);
+
+			// Bottom screen (320x240)
+			Graphics::activeScreen(m_bottomScreen);
+			
+			TextPrinter::print(m_textUpdating.c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 5, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
+
+			m_step = STEP_5_UPDATE;
+			break;
+
+
+
+		case STEP_5_UPDATE:
+			updateSuccess = R_SUCCEEDED(updateApp());
+			
+			m_step = STEP_6_UPDATE_RESULT;
+			break;
+
+
+
+		case STEP_6_UPDATE_RESULT:
+			// Top screen (400x240)
+			Graphics::activeScreen(m_topScreen);
+			m_spritePrinter.print(SPRITE_PCT_LOGO_150, (TOP_SCREEN_WIDTH / 2) - 75, (TOP_SCREEN_HEIGHT / 2) - 75);
+
+			// Bottom screen (320x240)
+			Graphics::activeScreen(m_bottomScreen);
+			
+			TextPrinter::print((updateSuccess ? m_textUpdateSuccess : m_textUpdateFail).c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 4, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
+
+			TextPrinter::print(m_textUpdateResultConfirm.c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 7, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
+
+			if (Input::isPressed(KEY_START))
+				m_step = STEP_7_MAIN;
+			break;
+
+
+
+		case STEP_7_MAIN:
 			if (Input::isPressed(KEY_START))
 			{
 				exit = true;
@@ -139,4 +214,38 @@ ScreenMain::ScreenMain(C3D_RenderTarget* topScreen, C3D_RenderTarget* bottomScre
 	}
 
 	m_spritePrinter.exit();
+}
+
+string ScreenMain::checkForUpdate()
+{
+	if (osGetWifiStrength() == 0)
+		return "";
+	
+	string out = "";
+
+	if (R_FAILED(HTTP::downloadText(out, HTTP::URL_LATEST_VERSION)))
+		return "";
+
+	if (out == "")
+		return "";
+	
+	m_latestVersion = JSON::parse(out);
+
+	if (m_latestVersion.size() == 0)
+		return "";
+
+	Version::Data latestVersion = Version::Data(string(m_latestVersion["version"])),
+		currentVersion = Version::getCurrentVersionData();
+
+	if (latestVersion > currentVersion)
+	{
+		return latestVersion.getVersionWithNote();
+	}
+
+	return "";
+}
+
+Result ScreenMain::updateApp()
+{
+	return -1;
 }

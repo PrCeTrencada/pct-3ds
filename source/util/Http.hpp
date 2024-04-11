@@ -19,13 +19,17 @@
 #ifndef HTTP_HPP
 #define HTTP_HPP
 
+#include <cstdlib>
 #include <stdlib.h>
 #include <string.h>
+#include <string>
 #include <stdio.h>
 #include <inttypes.h>
 #include <iostream>
+#include <malloc.h>
 
 #include <3ds.h>
+#include <curl/curl.h>
 
 #include "../common/commonValues.hpp"
 #include "../util/FS.hpp"
@@ -36,7 +40,8 @@ using namespace std;
 namespace HTTP
 {
 	const char* const URL_ENTRADES_WEB = "http://cetrencada.cat/comunitat/api/v1/request3ds.php?data=entrada";
-	const char* const URL_ZIP_HOME = "https://drive.usercontent.google.com/u/0/uc?id=1IxIYjB-lvmU9JTc6jtZnTEL-V0Cjb2w8&export=download";
+	const char* const URL_LATEST_VERSION = "http://cetrencada.cat/comunitat/api/v1/request3ds.php?data=pct-3ds&id=app-latest";
+	const string URL_TRADUCCIONS = "http://cetrencada.cat/comunitat/api/v1/request3ds.php?data=pct-3ds&id=3ds-cat";
 
 	// DEPRECATED
 	// Use downloadTextToFile instead

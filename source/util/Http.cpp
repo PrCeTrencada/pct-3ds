@@ -236,32 +236,32 @@ Result HTTP::downloadFile(string& outPath, string url, string loca, string filen
 	if (ret != 0)
 	{
 		// Error: Unable to open context
-		return 1;
+		return -1;
 	}
-	ret = httpcAddRequestHeaderField(&context, (char*)"User-Agent", (char*)"MULTIDOWNLOAD++");
+	ret = httpcAddRequestHeaderField(&context, (char*)"User-Agent", (char*)"PCT-3DS");
 	if (ret != 0)
 	{
 		// Error: Unable to add request header
-		return 1;
+		return -1;
 	}
 	ret = httpcSetSSLOpt(&context, 1 << 9);
 	if (ret != 0)
 	{
 		// Error: Unable to set SSL options
-		return 1;
+		return -1;
 	}
 	ret = httpcBeginRequest(&context);
 	if (ret != 0)
 	{
 		// Error: Unable to begin request
-		return 1;
+		return -1;
 	}
 	ret = httpcGetResponseStatusCodeTimeout(&context, &statuscode, 6000000000);
 	if (ret != 0)
 	{
 		// Error: Wrong protocol/Internet not connected
 		httpcCloseContext(&context);
-		return 1;
+		return -1;
 	}
 	if ((statuscode >= 301 && statuscode <= 303) || (statuscode >= 307 && statuscode <= 308))
 	{
@@ -271,7 +271,7 @@ Result HTTP::downloadFile(string& outPath, string url, string loca, string filen
 		return HTTP::downloadFile(outPath, newurl, loca, filename);
 	}
 	if (statuscode != 200)
-		return 1;
+		return -1;
 	ret = httpcGetResponseHeader(&context, (char*)"Content-Disposition", a, 2048);
 	if (ret != 0)
 	{
@@ -295,7 +295,7 @@ Result HTTP::downloadFile(string& outPath, string url, string loca, string filen
 	if (ret != 0)
 	{
 		// Error: could not get the file size
-		return 1;
+		return -1;
 	}
 	// File size is now in contentsize
 
@@ -318,7 +318,7 @@ Result HTTP::downloadFile(string& outPath, string url, string loca, string filen
 	out.closefile();
 	if (ret != 0) {
 		httpcCloseContext(&context);
-		return 1;
+		return -1;
 	}
 
 	outPath = location;
@@ -342,32 +342,32 @@ Result HTTP::downloadTextToFile(string url, string path, string filename)
 	if (ret != 0)
 	{
 		// Error: Unable to open context
-		return 1;
+		return -1;
 	}
-	ret = httpcAddRequestHeaderField(&context, (char*)"User-Agent", (char*)"MULTIDOWNLOAD++");
+	ret = httpcAddRequestHeaderField(&context, (char*)"User-Agent", (char*)"PCT-3DS");
 	if (ret != 0)
 	{
 		// Error: Unable to add request header
-		return 1;
+		return -1;
 	}
 	ret = httpcSetSSLOpt(&context, 1 << 9);
 	if (ret != 0)
 	{
 		// Error: Unable to set SSL options
-		return 1;
+		return -1;
 	}
 	ret = httpcBeginRequest(&context);
 	if (ret != 0)
 	{
 		// Error: Unable to begin request
-		return 1;
+		return -1;
 	}
 	ret = httpcGetResponseStatusCodeTimeout(&context, &statuscode, 6000000000);
 	if (ret != 0)
 	{
 		// Error: Wrong protocol/Internet not connected
 		httpcCloseContext(&context);
-		return 1;
+		return -1;
 	}
 	if ((statuscode >= 301 && statuscode <= 303) || (statuscode >= 307 && statuscode <= 308))
 	{
@@ -377,12 +377,12 @@ Result HTTP::downloadTextToFile(string url, string path, string filename)
 		return HTTP::downloadTextToFile(newurl, path, filename);
 	}
 	if (statuscode != 200)
-		return 1;
+		return -1;
 	ret = httpcGetDownloadSizeState(&context, NULL, &contentsize);
 	if (ret != 0)
 	{
 		// Error: could not get the file size
-		return 1;
+		return -1;
 	}
 	// Location: "/path/to/file.ext"
 	string location = path + filename;
@@ -399,7 +399,7 @@ Result HTTP::downloadTextToFile(string url, string path, string filename)
 	out.closefile();
 	if (ret != 0) {
 		httpcCloseContext(&context);
-		return 1;
+		return -1;
 	}
 
 	httpcCloseContext(&context);
@@ -421,19 +421,19 @@ Result HTTP::downloadText(string& out, string url)
 	if (ret != 0)
 	{
 		// Error: Unable to open context
-		return 1;
+		return -1;
 	}
 	ret = httpcAddRequestHeaderField(&context, (char*)"User-Agent", (char*)"PCT-3DS");
 	if (ret != 0)
 	{
 		// Error: Unable to add request header
-		return 1;
+		return -1;
 	}
 	ret = httpcSetSSLOpt(&context, 1 << 9);
 	if (ret != 0)
 	{
 		// Error: Unable to set SSL options
-		return 1;
+		return -1;
 	}
 	ret = httpcBeginRequest(&context);
 	if (ret != 0)
@@ -446,7 +446,7 @@ Result HTTP::downloadText(string& out, string url)
 	{
 		// Error: Wrong protocol/Internet not connected
 		httpcCloseContext(&context);
-		return 1;
+		return -1;
 	}
 	if ((statuscode >= 301 && statuscode <= 303) || (statuscode >= 307 && statuscode <= 308))
 	{
@@ -456,7 +456,7 @@ Result HTTP::downloadText(string& out, string url)
 		return HTTP::downloadText(out, newurl);
 	}
 	if (statuscode != 200)
-		return 1;
+		return -1;
 	ret = httpcGetDownloadSizeState(&context, NULL, &contentsize);
 	if (ret != 0)
 	{
@@ -477,7 +477,7 @@ Result HTTP::downloadText(string& out, string url)
 
 	if (ret != 0) {
 		httpcCloseContext(&context);
-		return 1;
+		return -1;
 	}
 
 	httpcCloseContext(&context);

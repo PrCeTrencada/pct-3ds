@@ -222,3 +222,8 @@ Result Title::install(const char* ciaPath, bool updatingSelf) {
 
 	return 0;
 }
+
+Result Title::updateSelf()
+{
+	return Result();
+}

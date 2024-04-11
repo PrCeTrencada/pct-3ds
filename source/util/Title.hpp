@@ -32,6 +32,8 @@ namespace Title
 	Result launch(u64 titleId, FS_MediaType mediaType);
 	Result deletePrevious(u64 titleid, FS_MediaType media);
 	Result install(const char* ciaPath, bool updateSelf);
+
+	Result updateSelf();
 }
 
 #endif // !TITLE_HPP
