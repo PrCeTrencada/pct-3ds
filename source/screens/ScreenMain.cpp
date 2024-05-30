@@ -56,7 +56,9 @@ ScreenMain::ScreenMain(C3D_RenderTarget* topScreen, C3D_RenderTarget* bottomScre
 			FS::createDirectory("/luma/titles");
 
 			// Check for app updates
-			updateAvailable = checkForUpdate();
+			// DEBUG - UNCOMMENT TO TEST - BEWARE: NOT WORKING //
+			//updateAvailable = checkForUpdate();
+			updateAvailable = "";
 
 			// Update the PCT-COM entrades from web
 			screenTraduccions.updateEntrades();
@@ -98,7 +100,7 @@ ScreenMain::ScreenMain(C3D_RenderTarget* topScreen, C3D_RenderTarget* bottomScre
 			// Bottom screen (320x240)
 			Graphics::activeScreen(m_bottomScreen);
 			
-			TextPrinter::print(m_textUpdating.c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 5, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
+			TextPrinter::print(m_textUpdating.c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 6, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
 
 			m_step = STEP_5_UPDATE;
 			break;
@@ -106,7 +108,7 @@ ScreenMain::ScreenMain(C3D_RenderTarget* topScreen, C3D_RenderTarget* bottomScre
 
 
 		case STEP_5_UPDATE:
-			updateSuccess = R_SUCCEEDED(updateApp());
+			updateSuccess = R_SUCCEEDED(Title::updateSelf());
 			
 			m_step = STEP_6_UPDATE_RESULT;
 			break;
@@ -121,9 +123,9 @@ ScreenMain::ScreenMain(C3D_RenderTarget* topScreen, C3D_RenderTarget* bottomScre
 			// Bottom screen (320x240)
 			Graphics::activeScreen(m_bottomScreen);
 			
-			TextPrinter::print((updateSuccess ? m_textUpdateSuccess : m_textUpdateFail).c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 4, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
+			TextPrinter::print((updateSuccess ? m_textUpdateSuccess : m_textUpdateFail).c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 5, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
 
-			TextPrinter::print(m_textUpdateResultConfirm.c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 7, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
+			TextPrinter::print(m_textUpdateResultConfirm.c_str(), C2D_AlignCenter, BOTTOM_SCREEN_WIDTH / 2, FONT_HEIGHT_STD * 8, 1.0f, FONT_SIZE_STD, FONT_SIZE_STD, C2D_Color32(COLOR_WHITE), BOTTOM_SCREEN_WIDTH - FONT_MARGIN * 2);
 
 			if (Input::isPressed(KEY_START))
 				m_step = STEP_7_MAIN;
@@ -243,9 +245,4 @@ string ScreenMain::checkForUpdate()
 	}
 
 	return "";
-}
-
-Result ScreenMain::updateApp()
-{
-	return -1;
 }

@@ -51,7 +51,7 @@ namespace HTTP
 	// @param url : URL of the file to download
 	// @param location : Location to save the file to
 	// @param filename : Name (including extension) of the file to save. Empty string to use the original filename
-	// @return 0 if the download was successful, 21 if it failed
+	// @return 0 if the download was successful, -1 if it failed
 	Result downloadFile(string& outPath, string url, string path, string filename);
 	// @param filename : Includes the extension
 	Result downloadTextToFile(string url, string path, string filename);

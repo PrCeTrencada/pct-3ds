@@ -34,7 +34,6 @@ public:
 
 private:
 	string checkForUpdate();
-	Result updateApp();
 	
 	enum MAIN_STEPS {
 		STEP_1_PREPARE_PRELOAD = 0,
@@ -69,12 +68,12 @@ private:
 	const string m_textUpdateCheck = "Cercant actualitzacions de l'aplicació...";
 	const string m_textUpdateAvailable[2] = {
 		"Actualització disponible",
-		"Si us plau, per confirmeu-ne la instal·lació\npremeu START"
+		"Si us plau, confirmeu-ne la instal·lació\npremeu START"
 	};
 	const string m_textUpdating = "S'està actualitzant l'aplicació.\nSi us plau, espereu sense tocar res.";
 	const string m_textUpdateSuccess = "L'actualització s'ha completat.\nEs reiniciarà l'aplicació.";
 	const string m_textUpdateFail = "No s'ha pogut actualitzar l'aplicació.\nSi us plau, torneu a intentar-ho més tard.";
-	const string m_textUpdateResultConfirm = "Prem START per continuar";
+	const string m_textUpdateResultConfirm = "Premeu START per continuar";
 
 	JSON m_latestVersion;
 

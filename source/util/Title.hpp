@@ -24,14 +24,23 @@
 #include "../common/commonValues.hpp"
 #include "FS.hpp"
 #include "Http.hpp"
+#include "Version.hpp"
 
 using namespace std;
+using JSON = nlohmann::json;
 
 namespace Title
 {
-	Result launch(u64 titleId, FS_MediaType mediaType);
-	Result deletePrevious(u64 titleid, FS_MediaType media);
-	Result install(const char* ciaPath, bool updateSelf);
+	enum Title_Format {
+		FORMAT_UNDEFINED = -1,
+		FORMAT_CIA,
+		FORMAT_3DSX
+	};
+	
+	Result launchTitle(u64 titleId);
+	Result installCia(string ciapath);
+	// TODO
+	Result install3dsx(const string& dsxPath, bool updateSelf);
 
 	Result updateSelf();
 }
